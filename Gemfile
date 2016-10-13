@@ -16,5 +16,5 @@ gemspec
 if Dir.exist? '../model'
   gem 'scheduler_model', path: '../model'
 else
-  gem 'scheduler_model', :git => 'git@github.com:alexrochas/class_grid_scheduler_model.git'
+  gem 'scheduler_model', :git => 'https://github.com/alexrochas/class_grid_scheduler_core.git'
 end
