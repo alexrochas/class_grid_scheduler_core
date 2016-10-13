@@ -5,4 +5,5 @@ rvm:
 before_install:
   - gem update bundler
   - bundle update # workaround for travis Gemfile.lock
-script: bundle exec rspec
+script: bundle exec rspec spec
+cache: bundler
