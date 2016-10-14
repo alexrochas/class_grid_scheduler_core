@@ -17,7 +17,12 @@
 #
 ENV["RAILS_ENV"] ||= 'test'
 
-require File.expand_path("../../../../config/environment", __FILE__)
+if Dir.exist? "../../../../config/environment"
+    require File.expand_path("../../../../config/environment", __FILE__)
+end
+
+require 'combustion'
+Combustion.initialize! :all
 
 # Require Factory Girl and DatabaseCleaner
 require 'rspec/rails'

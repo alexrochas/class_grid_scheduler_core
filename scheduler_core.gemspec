@@ -22,7 +22,8 @@ Gem::Specification.new do |s|
     s.add_dependency "json", "~> 1.8.3"
     s.add_dependency "scheduler_model"
     s.add_dependency "deface"
-    s.add_development_dependency "sqlite3"
-    s.add_development_dependency "rspec-rails"
+    s.add_dependency "sqlite3"
+    s.add_dependency "rspec-rails"
     s.add_development_dependency "byebug"
+    s.add_development_dependency 'combustion', '~> 0.5.5'
 end

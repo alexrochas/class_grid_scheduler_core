@@ -13,4 +13,8 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 # You need tell where the engine is
-gem 'scheduler_model', path: '../model'
+if Dir.exist? '../model'
+  gem 'scheduler_model', path: '../model'
+else
+  gem 'scheduler_model', :git => 'https://github.com/alexrochas/class_grid_scheduler_model.git'
+end
