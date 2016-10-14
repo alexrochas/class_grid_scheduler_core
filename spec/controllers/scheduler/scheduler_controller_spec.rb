@@ -8,16 +8,15 @@ module Scheduler
         context 'scheduling classes' do
             describe '#schedule' do
 
-                before(:each) do
-                    file = File.open("#{Scheduler::Core::Engine.root}/spec/resources/request-data.json").read
-                    @request_data = MultiJson.load(file)
-                end
+
 
                 context 'when data is not passed' do
-                    it 'should return error message' do
+                    subject (:response_json) {
                         post :schedule
-                        expect(response.body).to match(/You provided an invalid json/im)
-                    end
+                        MultiJson.load(response.body)
+                    }
+                    it {expect(response_json['error']).to match(/Ops! An error occured during class scheduling. Check your data./im)}
+                    it {expect(response_json['message']).to match(/no implicit conversion of nil into String/im)}
                 end
 
                 context 'when data is valid' do
@@ -29,12 +28,12 @@ module Scheduler
                 end
 
                 context 'when two classes are passed to one day' do
-                    it 'should return two possible forms' do
-                        post :schedule, @request_data
-
-                        given_response = MultiJson.load(response.body)
-                        expect(given_response).to eq(expect_response)
-                    end
+                    subject (:given_response) {
+                        file = File.open("#{Scheduler::Core::Engine.root}/spec/resources/request-data.json").read
+                        post :schedule, data: file
+                        MultiJson.load(response.body)
+                    }
+                    it {expect(given_response['grids'].count).to eq(6)}
                 end
             end
         end
